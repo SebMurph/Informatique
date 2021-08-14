@@ -1,0 +1,151 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% DOCUMENTCLASS %%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,svgnames]{article}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% packages %%%%%%%%%%%%%%%%%%%%%
+\usepackage[utf8]{inputenc}
+\usepackage{sectsty}
+\usepackage{lmodern}
+\usepackage{enumitem}
+\usepackage{calc}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{natbib}
+\usepackage{amsthm}
+\usepackage{titlesec}
+\usepackage{newtxtext,newtxmath}
+\usepackage{lipsum}% texte bidon
+\usepackage{appendix}
+\usepackage{pdfpages} 
+\usepackage{url}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{textcomp}     
+\usepackage{gensymb}
+\usepackage{tikz}
+\usepackage{multirow}
+\usepackage{wrapfig}
+\usepackage{makecell}
+\usepackage{fancyhdr}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{tocloft}
+%\usepackage[french]{babel}
+\def\labelitemi{$\bullet$}
+\usepackage{comment}
+
+%%%%%% needed in french mode to have nice bullets %%%%%%%%%%%%%%%%%%%
+\renewcommand{\labelitemi}{$\bullet$}
+
+
+%%% page layout and font %%%%%%%%%%%%%%%%%%%%%
+\renewcommand\familydefault{\sfdefault} %san serif font
+\setlength{\parindent}{0pt}
+\interfootnotelinepenalty=10000
+\onehalfspacing
+
+%%% Dotfill %%%%%%%%%%%%%%%%%%%%%
+\def\dotfill#1{\cleaders\hbox to #1{.}\hfill}
+\newcommand\dotline[2][.5em]{\leavevmode\hbox to #2{\dotfill{#1}\hfil}}
+\DeclareUnicodeCharacter{00B0}{\degree}
+\expandafter\let\expandafter\pnewline\csname\string\ \endcsname
+
+
+%%% hyperref setup %%%%%%%%%%%%%%%%%%%%%
+\newcommand\myshade{85}
+\colorlet{mylinkcolor}{violet}
+\hypersetup{
+ linkcolor  = mylinkcolor,
+ citecolor  = mylinkcolor!\myshade!black,
+%  urlcolor   = myurlcolor!\myshade!black,
+ colorlinks = true,
+ %colorurl= true,
+}
+
+
+%%% Nice section titles using tickz %%%%%%%%%%%%%%%%%%%%%
+\setlength{\cftsecindent}{0pt}% Remove indent for \section
+\setlength{\cftsubsecindent}{0pt}% Remove indent for \subsection
+\setlength{\cftbeforesecskip}{2pt}
+\definecolor{myblue}{RGB}{255,127,0}
+\definecolor{airforceblue}{rgb}{0.36, 0.54, 0.66}
+
+\newcommand{\sectionheader}[1]{%
+    \begin{tikzpicture}
+      \node[draw,color=blue!05,fill=blue!05,thick,right,inner sep=8pt] (sectiontitle) {\begin{minipage}{\linewidth-8pt*2}\color{blue}{#1}\end{minipage}};
+      \fill[fill=gray!75] (sectiontitle.north west) -- ++(0,6pt) -- ++(2cm,0) -- +(0.2cm,-6pt) -- cycle;
+    \end{tikzpicture}%
+}
+
+\newcommand{\subsectionheader}[1]{%
+    \begin{tikzpicture}
+      \node[draw,color=blue!05,fill=blue!05, right,inner sep=4pt] (sectiontitle) {\begin{minipage}{\linewidth-8pt*2}\color{black}{#1}\end{minipage}};
+      \fill[fill=gray!75] (sectiontitle.north west) -- ++(0,6pt) -- ++(2cm,0) -- +(0.2cm,-6pt) -- cycle;
+    \end{tikzpicture}%
+}
+
+\titleformat{\section}
+  [hang]% style : hang, display, runin, leftmargin, ...
+  {\large\bfseries\sffamily}% fonte numéro + titre
+  {}% numéro
+  {0em}% espace entre le numéro et le titre
+  {\sectionheader}% fonte titre
+\titlespacing*{\section}
+  {0pt}% retrait à gauche
+  {2em plus 0.3em minus .1em}% espace avant
+  {0.5em}% espace après
+  [0pt]% retrait à droite
+
+\titleformat{\subsection}
+  [hang]% style : hang, display, runin, leftmargin, ...
+  {\normalfont\bfseries\sffamily}% fonte numéro + titre
+  {\thesubsection}% numéro
+  {1em}% espace entre le numéro et le titre
+  {\subsectionheader}% fonte titre
+\titlespacing*{\subsection}
+  {0pt}% retrait à gauche
+  {1em plus 0.3em minus .1em}% espace avant
+  {0.1em }% espace après
+  [0pt]% retrait à droite
+\setcounter{secnumdepth}{0}
+
+
+ %%%%%% headers and footer titles %%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{\textit{GymInf, Introduction aux systèmes informatiques}}
+\lhead{\textit{S. Murphy}}
+\fancyfoot[C]{\thepage}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{large}\textcolor{airforceblue}{\textbf{Introduction aux systèmes informatiques} \\
+GymInf,  Année académique 2021-2022.}
+\end{large}\\
+\begin{Large}
+\begin{center}
+   \textcolor{airforceblue}{\textbf{Assistant vocal Echo Dot : composant d'input/output}}\\[.1cm]
+\end{center}
+\end{Large}
+\textit{Sébastien Murphy}\\
+\textit{Septembre 2021}\\
+%\textit{nombres de caractères espaces incluses: 6442}
+\\[.4cm]
+
+
+
+\textbf{Introduction.}
+
+\bibliographystyle{apalike}
+\bibliography{biblio}
+
+\end{document}
+
+
