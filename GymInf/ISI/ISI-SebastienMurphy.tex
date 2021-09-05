@@ -34,6 +34,10 @@
 %\usepackage[french]{babel}
 \def\labelitemi{$\bullet$}
 \usepackage{comment}
+\usepackage{tablefootnote}
+\usepackage{ragged2e}
+\usepackage{booktabs}
+\usepackage{mathrsfs}
 
 %%%%%% needed in french mode to have nice bullets %%%%%%%%%%%%%%%%%%%
 \renewcommand{\labelitemi}{$\bullet$}
@@ -153,11 +157,11 @@ GymInf,  Année académique 2021-2022.}
 
 %Alexa BT receiver: so it can function as a normal speaker
 
-\textbf{Courte biographie.} J'ai fait mes études de physique à Grenoble et ensuite ma thèse en physique des particules à l'université de Genève (soutenue en 2012). Pendant ma thèse, j'ai travaillé sur des expériences d'oscillation de neutrinos (T2K au Japon et NA61 au CERN), je faisait principalement de la simulation et du développement de détecteurs. J'ai ensuite fait un post-Doc à l'EPFZ (toujours basé au CERN) ou j'ai travaillé sur le développement de détecteurs à argon liquide toujours dans le domaine de la physique des neutrinos. Pendant les dix années où je travaillais dans la recherche, j'enseignais à 20\% à l'université. Depuis 2019, je suis enseignant en physique en maths au CO et au Collège à Genève. A noter que les deux dernières années où j'étais dans la recherche fondamentale, j'ai également travaillé environ deux ans en partenariat avec une entreprise basée à Neuchâtel (G-Ray) qui développait des capteurs à Rayons-X où l'absorbeur de photons (Germanium/ ou GaAs) était directement fixé sur le chip en Silicium. Ceci évite d'avoir recours à des micros points de soudure sur chaque pixel. Cette expérience m'a apporté des connaissances supplémentaires en électroniques ainsi que dans le milieu médical.
+\textbf{Courte biographie.} J'ai fait mes études de physique à Grenoble et ensuite ma thèse en physique des particules à l'université de Genève (soutenue en 2012). Pendant ma thèse, j'ai travaillé sur des expériences d'oscillation de neutrinos (T2K au Japon et NA61 au CERN), je faisait principalement de la simulation et du développement de détecteurs. J'ai ensuite fait un post-Doc à l'EPFZ (toujours basé au CERN) où j'ai travaillé sur le développement de détecteurs à argon liquide toujours dans le domaine de la physique des neutrinos. Pendant les dix années où je travaillais dans la recherche, j'enseignais à 20\% à l'université. Depuis 2019, je suis enseignant en physique et maths au CO et au Collège à Genève. À noter que les deux dernières années où j'étais dans la recherche fondamentale, j'ai également travaillé environ deux ans en partenariat avec une entreprise basée à Neuchâtel (G-Ray) qui développait des capteurs à Rayons-X où l'absorbeur de photons (Germanium/ ou GaAs) était directement fixé sur le chip en Silicium. Ceci évite d'avoir recours à des micros points de soudure sur chaque pixel. Cette expérience m'a apporté des connaissances supplémentaires en électroniques ainsi que dans le milieu médical.
 
  
 \textbf{Le composant Echo Dot choisi.}
-J'ai donc décidé de me focaliser sur les émetteurs-récepteurs Bluetooth (abrégé BT pour la suite) et Wifi de l'Echo Dot. Ces émetteurs-récepteurs sont fixés sur une seule carte: le chip MT6625LN\footnote{cette carte contient également un récepteur radio FM et un récepteur GPS} fabriqué par Mediatek \cite{MT6625LN} . L'Echo Dot se connecte au réseau internet de la maison via l'onde Wifi ce qui lui permet de communiquer avec les serveurs d'Amazon et d'interagir avec les objets connectés de l'habitation (lumières, électroménager, chauffage, etc.). Lorsque l'on émet un signal vocal du type "Alexa, allume la lumière", l'onde sonore de notre voix est numérisée, l'information binaire est transmise aux serveurs d'Amazon qui interprètent les données et comprennent la commande. L'émetteur Wifi sur la carte MT6625LN converti la commande binaire en impulsions électriques qui seront émises par l'antenne sous forme d'onde électromagnétique à 2.4 GHz. L'ampoule (qui contient un récepteur wifi) démodule le signal et capte ainsi l'information.
+J'ai donc décidé de me focaliser sur les émetteurs-récepteurs Bluetooth (abrégé BT pour la suite) et Wifi de l'Echo Dot. Ces émetteurs-récepteurs sont fixés sur une seule carte: le chip MT6625LN\footnote{cette carte contient également un récepteur radio FM et un récepteur GPS} fabriqué par Mediatek \cite{MT6625LN} . L'Echo Dot se connecte au réseau internet de la maison via l'onde Wifi ce qui lui permet de communiquer avec les serveurs d'Amazon et d'interagir avec les objets connectés de l'habitation (lumières, électroménager, chauffage, etc.). Lorsque l'on émet un signal vocal du type "Alexa, allume la lumière", l'onde sonore de notre voix est numérisée, l'information binaire est transmise aux serveurs d'Amazon qui interprètent les données et comprennent la commande. L'émetteur Wifi sur la carte MT6625LN convertit la commande binaire en impulsions électriques qui seront émises par l'antenne sous forme d'onde électromagnétique à 2.4 GHz. L'ampoule connectée dans la maison (qui contient un récepteur wifi) démodule le signal et capte ainsi l'information.
 Les composants émetteurs récepteur de signal sur l'Echo Dot font donc l'interface entre le monde analogique externe (les impulsions électriques des signaux Wifi/BT) et l'information digitale traitée par la machine.
 
 En tant que scientifique, je n'ai jamais eu l'occasion d'étudier en détail le traitement du signal numérique. Je pense qu'il est important de comprendre comment une onde radio est modulée/démodulée et convertie en information binaire exploitable par un processeur. Nous vivons dans un monde où les signaux sans fils (5G, internet des objets, ...) occupent une place grandissante dans notre quotidien. Nous allons enseigner l'informatique à des adultes de demain qui vivront vraisemblablement dans des maisons connectées et conduiront des voitures autonomes, tout ceci grâce à de l'information transmise par des ondes porteuses. Je pense donc important, à travers ce composant de l'Echo Dot, d'étudier et de comprendre en plus de détail comment une onde d'une gamme de fréquence donnée est traduite en information binaire (et inversement).
@@ -168,7 +172,59 @@ Comment ces modules sont-ils interfacés avec l'antenne de l'Echo Dot et en gén
 Voici donc en quelques lignes mes motivations pour étudier ces composants plus en détail et quelques premières questions qui serviront de guide pour le rendu final.
 
 
-%Le BT et le Wifi ont des fréquences identiques à 2.4 GHz\footnote{La différence principale semble être sur la puissance du signal et le débit d'information. Les objets connectés dans la maison utilisent le signal Wifi en non le BT. Le signal BT est utilisé principalement pour que l'écho dot fasse également office d'enceinte externe si l'usager veut appareiller par exemple un téléphone portable.}. A priori je pense donc que les deux émetteurs récepteurs sur la carte fonctionnent d'une façon similaire.
+\section{Émetteur-récepteur Bluetooth et Wifi: fonctionnement général}
+Dans un premier temps je trouve important de s'intéresser aux différences principales entre le signal BT et wifi. Le tableau \ref{tab:wifi-bt} ci-dessous  liste quelques une des propriétés des signaux. On voit que les fréquences sont les mêmes, les différences principales viennent de la bande passante qui est beaucoup plus élevée pour le Wifi ainsi que la puissance du signal. L'emetteur/recepteur wifi consomme plus de puissance et permet de transmettre beaucoup plus de données alors que le bluetooth consomme très peu mais est concu véhiculer une quantitée de données beaucoup plus faible. On voit sur les téléphone, le bluetooth peut être allumé constamment sans grand impact sur la duréee de vie de la batterie alors que lorsque lon utiliser le signal wifi (partage de connexion) la batterie se vide beaucoup plus rapidement.
+
+Mise à part cela on peut donc penser qu'il n'y a pas de différence intrinsèques fondamentales entre les émetteurs/récepteur BT et wifi  au niveau de la carte se fera de manière quasi-identique. La modulation du signal devrait être similaires.
+
+
+\begin{table}[!ht]
+\renewcommand{\arraystretch}{1.2}
+\begin{center}
+\begin{tabular}{p{.3\textwidth}p{.2\textwidth}p{.2\textwidth}p{.2\textwidth}}
+  \toprule
+ élément comparé& Wifi & Bluetooth & 5G \\
+ \midrule
+ \midrule
+ Bande passante & 7 Gbit/s\tablefootnote{norme 802.11ac} & 3 Mbit/s\tablefootnote{bluetooth 4.x}& 10 Gbit/s\\
+    \midrule
+portée & 70 m & 10 m& env. 500 m\\
+\midrule
+%consommation & 70 m & 10 m& env. 500 m\\
+%\midrule
+puissance signal (dBm / mW) & -30 (1e-3) & -50 (1e-5)& 40 (4e+4)  \tablefootnote{max au niveau de l'antenne relais\cite{5G}}\\
+\midrule
+Fréquence onde porteuse & 2.4 et 5 GHz & 2.4 GHz & 3.5 et 26 GHz\tablefootnote{en France.\cite{5G-arias}}\\
+   \bottomrule
+        \end{tabular}
+     \end{center}
+     \caption{\label{tab:wifi-bt} Différences principales entre signaux BT et Wifi. La 5G est aussi inclue pour informations supplémentaires (bien que l'écho dot n'ait pas d'émetteurs-récepteurs 5G). Tiré de \cite{web-bt} et \cite{wiki-wifi}}
+   \end{table}
+   
+   
+Necessite d'être branché au secteur tandis que le BT consomme très peu et et donc utilisé pour envoyer peu de données et une plus longue portée.
+Donc les emeteurs recepteurs sont quasi identiques. Au niveau du fonctionnement sur la carte il y a très peu de différence.
+Le BT et le Wifi ont des fréquences identiques à 2.4 GHz\footnote{La différence principale semble être sur la puissance du signal et le débit d'information. Les objets connectés dans la maison utilisent le signal Wifi en non le BT. Le signal BT est utilisé principalement pour que l'écho dot fasse également office d'enceinte externe si l'usager veut appareiller par exemple un téléphone portable.}. A priori je pense donc que les deux émetteurs récepteurs sur la carte fonctionnent d'une façon similaire.
+
+\section{La carte MT6625LN dans l'Echo Dot et architecture.}
+
+
+\section{Lien avec les autres composants choisis.}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{fig/echo-dot-inside}
+\caption{Dissection de l'écho dot avec Zoom sur les composants étudiés. De G à D a) le convertisseur analog/digital de voix, b) le processeur et c) le chip MT6625LN avec les émetteurs/repcepeurs BT et wifi. Tiré de \cite{wikimedia-echo-dot}}
+\label{fig:gain-var}
+\end{center}
+\end{figure}
+
+
+
+%\textbf{Cours du 28/08}
+%Système d'exploitation. Notion de priorité. Taper sur un clavier asynchorne 
+
+%
 
 %le Wifi peut avoir d'autres gamme de fréquences par ex. 5 GHz. Le wifi 1 Gps le BT 3 Mps \cite{wifi})
 %\footnote{Chose que je ne savais pas le BT et le Wifi ont des fréquences identiques à 2.4 GHz, }
