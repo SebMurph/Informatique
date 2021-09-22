@@ -206,6 +206,23 @@ Necessite d'être branché au secteur tandis que le BT consomme très peu et et 
 Donc les emeteurs recepteurs sont quasi identiques. Au niveau du fonctionnement sur la carte il y a très peu de différence.
 Le BT et le Wifi ont des fréquences identiques à 2.4 GHz\footnote{La différence principale semble être sur la puissance du signal et le débit d'information. Les objets connectés dans la maison utilisent le signal Wifi en non le BT. Le signal BT est utilisé principalement pour que l'écho dot fasse également office d'enceinte externe si l'usager veut appareiller par exemple un téléphone portable.}. A priori je pense donc que les deux émetteurs récepteurs sur la carte fonctionnent d'une façon similaire.
 
+\section{Modulation et dé-modulation de l'information sur une onde radio}
+ %a transceiver is mainly use to convert the digital signal to an electrical, radio or light signal by a method of encoding scheme. This method uses the number zero and one to represent the voltage. A 0 might be represented as a zero voltage on the wire, while a 1 might be represented by a positive voltage. 
+ 
+De façon générale un émetteur-récepteur (transceiver) est utilisé pour convertir le signal numérique en un signal électromagnétique et vice-versa \cite{medium}. 
+Lorsqu'un usager donne une commande vocale à l'Echo-Dot le signal sonore est numérisé (cf composant n°1 Daniel). Le transceiver transforme ce signal numérique correspondant au message binaire en signal analogique à haute fréquence. Ce dernier est envoyé à une antenne, qui se met alors à rayonner une onde électromagnétique autour de 2.4 GHz (onde Wifi) se propageant dans l’air pour atteindre le routeur de la maison. L'echo-Dot a ainsi transmis l'information vers le router qui à son tour peut envoyer l'information vers les serveurs Amazon pour être interprété. Quand le signal interprété reviens via le router c'est exactement l'inverse qui se produit dans l'Echo-Dot c'est à dire que l'information codée sous forme de signal analogique (sur l'onde EM) est transformé en signal numérique pour être utilisé par l'Echo-Dot. Lorsque le l'information binaire est convertie en signal analogique on parle de modulation du signal ; dans le sens contraire c'est la démodulation.
+
+% modulation: https://wifi.pressbooks.com/chapter/methodes-de-modulation/
+
+% modulation http://claude.lahache.free.fr/mapage2/modulations-numeriques.pdf
+
+%Le transciever code cette information sur un
+%par une méthode de schéma de codage. Cette méthode utilise le nombre zéro et un pour représenter la tension. Un 0 peut être représenté par une tension nulle sur le fil, tandis qu'un 1 peut être représenté par une tension positive.
+
+%le signal numérique correspondant au message binaire est transformé en signal analogique à haute fréquence (fréquences radio). Ce dernier est envoyé à une antenne, qui se met alors à rayonner une onde électromagnétique se propageant dans l’air pour atteindre l’antenne relais la plus proche. L'onde est ensuite encore transformée en signal électrique, pour être transmise via des câbles ou des fibres optiques sur de très grandes distances, jusqu’à enfin atteindre l’antenne relais la plus proche du destinataire. Le processus de réception est le même que celui d’envoi, en inversé. La carte électronique du système de communication du récepteur décode le langage binaire 
+
+%Modulation is happening on the sending end where binary data is converted to analog waves, and Demodulation is happening on the receiving end where the analog waves are converted back to binary data
+
 \section{La carte MT6625LN dans l'Echo Dot et architecture.}
 
 
@@ -214,8 +231,10 @@ Le BT et le Wifi ont des fréquences identiques à 2.4 GHz\footnote{La différen
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{fig/echo-dot-inside}
-\caption{Dissection de l'écho dot avec Zoom sur les composants étudiés. De G à D a) le convertisseur analog/digital de voix, b) le processeur et c) le chip MT6625LN avec les émetteurs/repcepeurs BT et wifi. Tiré de \cite{wikimedia-echo-dot}}
+\caption{Dissection de l'écho dot avec zoom sur les composants étudiés. De G à D a) le convertisseur analogue/digital de voix, b) le processeur et c) le chip MT6625LN avec les émetteurs/repcepeurs BT et wifi. Tiré de \cite{wikimedia-echo-dot}}
 \label{fig:gain-var}
+
+Plus intéressant si c'est pas un élément de hardware il interface et dialogue avec tout le reste
 \end{center}
 \end{figure}
 
